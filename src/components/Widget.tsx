@@ -1,7 +1,10 @@
 function Widget() {
     return ( 
         <div>
-            Password generator widget/
+            <h1>Password generator widget</h1>
+            <div>
+                
+            </div>
         </div>
      );
 }

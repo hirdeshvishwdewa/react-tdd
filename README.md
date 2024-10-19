@@ -1,46 +1,24 @@
-# Getting Started with Create React App
+# Password generator
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## High Level Design:
+### Requirement-
+1. User should be able to generate strong random passwords string,
+2. User should be able to copy generated password string in a single click,
+3. User should be able to choose if the password should contains only alphabet, only numbers, only special characters
+4. User should be able to adjust the length of the password
 
-## Available Scripts
+### Scoping (Prioritization)
 
-In the project directory, you can run:
+### Technology choices-
+We are going to use React for this application.
 
-### `npm start`
+## Low level Design:
+### Component Architecture-
+1. Create a widgit at the top-center of the screen
+2. Widget should contain a text box in which the password is displayed,
+3. Widget should contain a button next to the tex box, on click of button, the password should get copied to the clipboard,
+4. Widget should contain a slider-input to choose the length of the password (default value is 8),
+5. Widget should contain a checkbox to choose if password should contain numbers as well,
+6. Widget should contain a checkbox to choose if password should contain special characters as well
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Data API & protocol, Implementation-

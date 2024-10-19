@@ -1,11 +1,10 @@
 import './App.css';
+import Widget from './components/Widget';
 
 function App() {
   return (
     <>
-      <div>
-        Learn react with TDD approach
-      </div>
+      <Widget></Widget>
     </>
   );
 }

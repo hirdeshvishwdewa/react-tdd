@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import Widget from './Widget';
 test('renders learn react link', () => {
   render(<Widget />);
@@ -6,9 +6,10 @@ test('renders learn react link', () => {
   expect(linkElement).toBeInTheDocument();
 });
 
-test('widget contains a text box', async () => {
+test('widget contains a text box', () => {
+    render(<Widget />);
     // Check if the text box for the password is rendered
-    screen.findByTestId('password')
-    expect().toBeInTheDocument();
+    const element = screen.getByTestId('password');
+    expect(element).toBeInTheDocument();
     // await waitFor(() => );
 });

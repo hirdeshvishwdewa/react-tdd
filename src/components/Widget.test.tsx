@@ -49,7 +49,6 @@ describe("Should test all the widget methods", () => {
     test('widget should contain a characters option', async () => {
         render(<Widget />);
         const element = screen.getByTestId('characters') as HTMLInputElement;
-        const passwordTextBox = screen.getByTestId('password') as HTMLInputElement;
         expect(element).toBeInTheDocument();
         expect(element.checked).toBe(false);
         fireEvent.change(element, { target: { checked: true }});
@@ -58,6 +57,7 @@ describe("Should test all the widget methods", () => {
         expect(element.checked).toBe(false); // On change
         fireEvent.click(element);
         await waitFor(() => {
+            const passwordTextBox = screen.getByTestId('password') as HTMLInputElement;
             expect(/[!@#$%^&*()]/.test(passwordTextBox.value)).toBe(true);
         })
     });

@@ -4,7 +4,9 @@ import Widget from './components/Widget';
 function App() {
   return (
     <>
-      <Widget></Widget>
+      <div className='flex flex-wrap justify-center bg-black h-screen'>
+        <Widget></Widget>
+      </div>
     </>
   );
 }

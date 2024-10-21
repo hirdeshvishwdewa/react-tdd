@@ -17,10 +17,10 @@ function Widget() {
                 </div>
                 <div className="flex gap-3 mt-2 w-100">
                     <div className="w-2/4">
-                        <input data-testid="range" type="range" min="6" max="32" value={range} onChange={(e) => setRange(Number(e.target.value))} /> Length ({range})
+                        <input className="cursor-pointer" data-testid="range" type="range" min="6" max="32" value={range} onChange={(e) => setRange(Number(e.target.value))} /> <span>Length({range})</span>
                     </div>
-                    <div><input data-testid="numbers" type="checkbox" checked={numberAllowed} onChange={(e) => setNumberAllowed(e.target.checked)}/> Numbers</div>
-                    <div><input data-testid="characters" type="checkbox" checked={charactersAllowed} onChange={(e) => setCharactersAllowed(e.target.checked)} /> Characters</div>
+                    <div><input className="cursor-pointer" id="numbers" data-testid="numbers" type="checkbox" checked={numberAllowed} onChange={(e) => setNumberAllowed(e.target.checked)}/> <label htmlFor="numbers">Numbers</label></div>
+                    <div><input className="cursor-pointer" id="characters" data-testid="characters" type="checkbox" checked={charactersAllowed} onChange={(e) => setCharactersAllowed(e.target.checked)} /> <label htmlFor="characters">Characters</label></div>
                 </div>
             </div>
         </div>

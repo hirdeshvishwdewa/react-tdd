@@ -10,8 +10,11 @@ function Widget() {
                     <button className="bg-blue-600 rounded-e-lg px-3 h-100 w-1/6 border-blue-600 border text-white">Copy</button>
                 </div>
                 <div className="flex">
-                   Choose Length: 
+                    <div data-testid="slider">Choose Length: </div>
+                    <input type="checkbox" data-testid="numbers"/>
+                    <input type="checkbox" data-testid="characters"/>
                 </div>
+                
             </div>
         </div>
     );

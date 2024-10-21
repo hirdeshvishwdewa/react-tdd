@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import Widget from './Widget';
 
 describe("Should test all the widget methods", () => {
@@ -18,19 +18,33 @@ describe("Should test all the widget methods", () => {
 
     test('widget should contain a slider', () => {
         render(<Widget />);
-        const element = screen.getByTestId('slider');
+        const element = screen.getByTestId('range') as HTMLInputElement;
         expect(element).toBeInTheDocument();
+        expect(element.value).toBe('8'); //Default value
+        fireEvent.change(element, { target: { value: '20' }});
+        expect(element.value).toBe('20'); // On change
+
     });
     
     test('widget should contain a numbers option', () => {
         render(<Widget />);
-        const element = screen.getByTestId('numbers');
+        const element = screen.getByTestId('numbers') as HTMLInputElement;
         expect(element).toBeInTheDocument();
+        expect(element.checked).toBe(false);
+        fireEvent.change(element, { target: { checked: false }});
+        expect(element.checked).toBe(false); // On change
+        fireEvent.change(element, { target: { checked: true }});
+        expect(element.checked).toBe(true); // On change
     });
 
     test('widget should contain a characters option', () => {
         render(<Widget />);
-        const element = screen.getByTestId('characters');
+        const element = screen.getByTestId('characters') as HTMLInputElement;
         expect(element).toBeInTheDocument();
+        expect(element.checked).toBe(false);
+        fireEvent.change(element, { target: { checked: false }});
+        expect(element.checked).toBe(false); // On change
+        fireEvent.change(element, { target: { checked: true }});
+        expect(element.checked).toBe(true); // On change
     });
 });

@@ -1,18 +1,37 @@
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 function Widget() {
 
     const [range, setRange] = useState(8);
     const [numberAllowed, setNumberAllowed] = useState(false);
     const [charactersAllowed, setCharactersAllowed] = useState(false);
-    const [password, setSetPassword] = useState("jshdgjagsd");
+    const [password, setPassword] = useState("");
+
+    const generatePassword = useCallback(() => {
+        let password = "";
+        let str = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+        const numbers = "0123456789";
+        const characters = "!@#$%^&*()";
+        if (numberAllowed) str += numbers;
+        if (charactersAllowed) str += characters;
+        
+        for (let i = 1; i <= range; i++) {
+            const randomIndex = Math.floor(Math.random() * str.length);
+            password += str.charAt(randomIndex);
+        }
+        setPassword(password);
+    }, [range, numberAllowed, charactersAllowed]);
+
+    useEffect(() => {
+        generatePassword();
+    }, [range, numberAllowed, charactersAllowed]);
 
     return (
         <div className="mt-10 p-4 rounded-lg text-orange-900 h-fit w-1/3 bg-blue-400">
             <h1>Password generator widget</h1>
             <div className="w-100">
                 <div className="flex">
-                    <input className="border rounded-s-lg w-5/6 p-1" type="text" data-testid="password" value={password}/>
+                    <input className="border rounded-s-lg w-5/6 p-1" type="text" data-testid="password" value={password} readOnly/>
                     <button className="bg-blue-600 rounded-e-lg px-3 h-100 w-1/6 border-blue-600 border text-white">Copy</button>
                 </div>
                 <div className="flex gap-3 mt-2 w-100">

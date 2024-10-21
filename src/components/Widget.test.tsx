@@ -1,11 +1,15 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import Widget from './Widget';
 
 describe("Should test all the widget methods", () => {
-    test('renders learn react link', () => {
+    test('renders Widget', async () => {
         render(<Widget />);
         const linkElement = screen.getByText(/Password generator widget/i);
         expect(linkElement).toBeInTheDocument();
+        await waitFor(() => {
+            const passwordElement = screen.getByTestId('password') as HTMLInputElement;
+            expect(passwordElement.value).toHaveLength(8);
+        });
     });
     
     test('widget should contains a text box', () => {
@@ -25,7 +29,7 @@ describe("Should test all the widget methods", () => {
         const lengthElement = screen.getByText(/20/i);
         expect(lengthElement).toBeInTheDocument();
         const passwordElement = screen.getByTestId('password') as HTMLInputElement;
-        expect(passwordElement.textContent).toHaveLength(20);
+        expect(passwordElement.value).toHaveLength(20);
     });
     
     test('widget should contain a numbers option', () => {
@@ -33,24 +37,28 @@ describe("Should test all the widget methods", () => {
         const element = screen.getByTestId('numbers') as HTMLInputElement;
         expect(element).toBeInTheDocument();
         expect(element.checked).toBe(false);
-        fireEvent.change(element, { target: { checked: false }});
-        expect(element.checked).toBe(false); // On change
+        const passwordElement = screen.getByTestId('password') as HTMLInputElement;
         fireEvent.change(element, { target: { checked: true }});
         expect(element.checked).toBe(true); // On change
-        const passwordElement = screen.getByTestId('password') as HTMLInputElement;
-        expect(/\d/.test(passwordElement.textContent ? passwordElement.textContent : '')).toBe(true);
+        fireEvent.change(element, { target: { checked: false }});
+        expect(element.checked).toBe(false); // On change
+        fireEvent.click(element);
+        expect(/\d/.test(passwordElement.value)).toBe(true);
     });
 
-    test('widget should contain a characters option', () => {
+    test('widget should contain a characters option', async () => {
         render(<Widget />);
         const element = screen.getByTestId('characters') as HTMLInputElement;
+        const passwordTextBox = screen.getByTestId('password') as HTMLInputElement;
         expect(element).toBeInTheDocument();
         expect(element.checked).toBe(false);
-        fireEvent.change(element, { target: { checked: false }});
-        expect(element.checked).toBe(false); // On change
         fireEvent.change(element, { target: { checked: true }});
         expect(element.checked).toBe(true); // On change
-        const passwordTextBox = screen.getByTestId('password');
-        expect(/[@#$%^&*]/.test(passwordTextBox.textContent ? passwordTextBox.textContent : '')).toBe(true);
+        fireEvent.change(element, { target: { checked: false }});
+        expect(element.checked).toBe(false); // On change
+        fireEvent.click(element);
+        await waitFor(() => {
+            expect(/[!@#$%^&*()]/.test(passwordTextBox.value)).toBe(true);
+        })
     });
 });
